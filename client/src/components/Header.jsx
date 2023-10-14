@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import {
   AiOutlineMenu,
   AiOutlineClose,
@@ -27,20 +28,26 @@ const Header = () => {
           <ul
             className={`md:flex hidden text-white gap-5 items-center pl-[20px]`}
           >
-            <li>Home</li>
-            <li>Rental</li>
-            <li>Resource</li>
-            <li>Contact</li>
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/rental">Rental</NavLink>
+            <NavLink to="/faq">FAQ</NavLink>
           </ul>
           {/* Resposinsive menu */}
           <ul
             className={`duration-300 md:hidden w-full h-screen fixed text-white bg-black top-[92px]
          ${toggle ? "left-[0%]" : "left-[-100%]"} `}
           >
-            <li className="p-2">Home</li>
-            <li className="p-2">Rental</li>
-            <li className="p-2">Resource</li>
-            <li className="p-2">Contact</li>
+            <li className="p-2">
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li className="p-2">
+              {" "}
+              <NavLink to="/rental">Rental</NavLink>
+            </li>
+            <li className="p-2">
+              {" "}
+              <NavLink to="/faq">FAQ</NavLink>
+            </li>
           </ul>
         </div>
         <div className="relative flex">
