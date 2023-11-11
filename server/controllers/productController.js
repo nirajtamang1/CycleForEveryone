@@ -1,7 +1,6 @@
 import slugify from "slugify";
 import productModel from "../models/productModel.js";
 import fs from "fs";
-import { AsyncLocalStorage } from "async_hooks";
 
 export const createProductController = async (req, res) => {
   try {

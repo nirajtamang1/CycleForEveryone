@@ -1,3 +1,87 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&family=Red+Hat+Display:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,600&family=Poppins:wght@300;400&family=Red+Hat+Display:wght@300&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* font-family: 'Poppins', sans-serif;
+font-family: 'Red Hat Display', sans-serif; */
+
+/* font-family: 'Playfair Display', serif;
+font-family: 'Poppins', sans-serif;
+font-family: 'Red Hat Display', sans-serif; */
+
+/* Header Navbar CSS */
+.navbar {
+  font-family: "Poppins", sans-serif;
+  font-size: 17px;
+  line-height: 26px;
+  text-transform: uppercase;
+  box-shadow: 0 8px 6px -6px gray;
+  border-bottom: 0.3px solid gray !important;
+}
+.nav-link {
+  font-weight: 300 !important;
+}
+
+.active {
+  border-bottom: 1px solid black;
+}
+.nav-bar {
+  font-weight: 700;
+  font-family: "roboto", "sans-serif";
+  letter-spacing: 3px;
+}
+
+/* Footer  */
+.footer {
+  color: white;
+  padding: 25px;
+  background: linear-gradient(to right, #434343, #000000);
+}
+.footer a {
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+}
+.footer a:hover {
+  color: #ffefba;
+  border-bottom: 1px solid #ffefba;
+}
+
+/* Page Not found */
+.PageNotFound {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  min-height: 75vh;
+}
+
+.pnf-btn {
+  text-decoration: none;
+  padding: 10px 20px;
+}
+
+.contact-title {
+  margin-top: 50px;
+  color: white;
+  background-color: black;
+}
+
+/* Register Page */
+.register {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  min-height: 75vh;
+  margin-left: 25%;
+}
+
+/* Product Link  */
+.product-link{
+  text-decoration: none;
+  color:black;
+}
