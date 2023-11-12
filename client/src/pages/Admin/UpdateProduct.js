@@ -32,7 +32,7 @@ function UpdateProduct() {
       setPrice(data.product.price);
       setQuantity(data.product.quantity);
       setShipping(data.product.shipping);
-      setCategory(data.product.category);
+      setCategory(data.product.category._id);
     } catch (error) {}
   };
   useEffect(() => {
@@ -49,7 +49,7 @@ function UpdateProduct() {
       }
     } catch (error) {
       console.log(error);
-      toast.error("Sometthing went wrong");
+      toast.error("Something went wrong");
     }
   };
   useEffect(() => {
@@ -64,22 +64,37 @@ function UpdateProduct() {
       productData.append("description", description);
       productData.append("price", price);
       productData.append("quantity", quantity);
-      productData.append("photo", photo);
+      photo && productData.append("photo", photo);
       productData.append("category", category);
 
-      const { data } = await axios.post(
-        "http://localhost:8080/api/v1/product/create-product",
+      const { data } = await axios.put(
+        `http://localhost:8080/api/v1/product/update-product/${id}`,
         productData
       );
       if (data?.success) {
-        toast.success("Product created Successfully");
-        navigate("/dashboard/admin/product");
+        toast.success("Product Updated Successfully");
+        navigate("/dashboard/admin/products");
       } else {
         toast.error(data?.message);
       }
     } catch (error) {
       console.log(error);
-      toast.error("Error while creating Product");
+      toast.error("Error while Updating Product");
+    }
+  };
+
+  // Delete Product
+  const handleDelete = async () => {
+    try {
+      let answer = window.prompt("Enter yes to delete product");
+      if (!answer) return;
+      const { data } = await axios.delete(
+        `http://localhost:8080/api/v1/product/delete-product/${id}`
+      );
+      toast.success("Product delete sucessfullly");
+      navigate("/dashboard/admin/products");
+    } catch (error) {
+      toast.error("Something went wrong");
     }
   };
   return (
@@ -123,11 +138,19 @@ function UpdateProduct() {
                 </label>
               </div>
               <div className="mb-3">
-                {photo && (
+                {photo ? (
                   <div className="text-center">
                     <img
                       src={URL.createObjectURL(photo)}
                       alt="product_photo"
+                      height={"200px"}
+                      className="img img-responsive"
+                    />
+                  </div>
+                ) : (
+                  <div className="text-center">
+                    <img
+                      src={`http://localhost:8080/api/v1/product/product-photo/${id}`}
                       height={"200px"}
                       className="img img-responsive"
                     />
@@ -189,6 +212,11 @@ function UpdateProduct() {
               <div className="mb-3">
                 <button className="btn btn-primary" onClick={handleUpdate}>
                   Update Product
+                </button>
+              </div>
+              <div className="mb-3">
+                <button className="btn btn-danger" onClick={handleDelete}>
+                  Delete Product
                 </button>
               </div>
             </div>
