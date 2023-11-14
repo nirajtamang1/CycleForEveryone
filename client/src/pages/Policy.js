@@ -5,7 +5,7 @@ import Layout from "../components/Layout/Layout";
 function Policy() {
   return (
     
-    <Layout title="Privacy Policy - Ecommerce app">
+    <Layout title="Privacy Policy - Booking app">
       <div className="container mt-5">
         <div className="row ">
           <div className="col">

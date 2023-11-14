@@ -5,7 +5,7 @@ import contactus from "../images/contactus.jpg";
 
 function Contacts() {
   return (
-    <Layout title="Contact us - Ecommerce">
+    <Layout title="Contact us - Booking">
       <div className="container mt-5">
         <div className="row ">
           <div className="col">
