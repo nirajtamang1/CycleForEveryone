@@ -5,6 +5,7 @@ import {
   deleteProductController,
   getProductController,
   getSingleProductController,
+  productCategoryController,
   productCountController,
   productFilterController,
   productListController,
@@ -55,5 +56,8 @@ router.get("/product-list/:page", productListController)
 
 //similar Product
 router.get("/related-product/:pid/:cid", relatedProductController)
+
+//category wise product display
+router.get("/product-category/:slug", productCategoryController)
 
 export default router;

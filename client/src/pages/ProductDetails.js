@@ -1,10 +1,11 @@
-import React, { useState, useEffect, PureComponent } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout/Layout";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function ProductDetails() {
   const params = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState({});
   const [relatedProducts, setRelatedProduct] = useState([]);
 
@@ -55,6 +56,7 @@ function ProductDetails() {
           <h6>Description:{product.description}</h6>
           <h6>Price:{product.price}</h6>
           <h6>Category:{product?.category?.name}</h6>
+
           <button className="btn btn-secondary ms-1">ADD TO CART</button>
         </div>
       </div>
@@ -64,7 +66,7 @@ function ProductDetails() {
         {relatedProducts.length < 1 && <p>No similar product is found</p>}
         {/* {JSON.stringify(relatedProducts, null, 4)} */}
         {relatedProducts?.map((p) => (
-          <div className="card m-2" style={{ width: "18rem" }}>
+          <div className="card m-2 " style={{ width: "18rem" }}>
             <img
               className="card-img-top"
               src={`http://localhost:8080/api/v1/product/product-photo/${p._id}`}
@@ -74,6 +76,14 @@ function ProductDetails() {
               <h5 className="card-title">{p.name}</h5>
               <p className="card-text">{p.description.substring(0, 20)}</p>
               <p className="card-text">Rs. {p.price}</p>
+
+              <button
+                className="btn btn-primary ms-1 mb-2"
+                onClick={() => navigate(`/product/${p.slug}`)}
+              >
+                More Details
+              </button>
+
               <button className="btn btn-secondary ms-1">Add to Cart</button>
             </div>
           </div>

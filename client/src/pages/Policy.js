@@ -7,7 +7,7 @@ function Policy() {
     
     <Layout title="Privacy Policy - Booking app">
       <div className="container mt-5">
-        <div className="row ">
+        <div className="row">
           <div className="col">
             <img
               src={policy}

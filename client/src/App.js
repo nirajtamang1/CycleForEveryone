@@ -21,37 +21,38 @@ import UpdateProduct from "./pages/Admin/UpdateProduct";
 import ProductDetails from "./pages/ProductDetails";
 import { Categories } from "./pages/Categories";
 import CategoryProduct from "./pages/CategoryProduct";
+import CartPage from "./pages/CartPage";
 
 function App() {
   return (
     // div fragment
     <>
       <Routes>
-        <Route path="/" element={<HomePage />}></Route>
-        <Route path="/product/:slug" element={<ProductDetails />}></Route>
-        <Route path="/categories" element={<Categories />}></Route>
-        <Route path="/category/:slug" element={<CategoryProduct />}></Route>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/product/:slug" element={<ProductDetails />} />
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/category/:slug" element={<CategoryProduct />} />
         <Route path="/dashboard" element={<PrivateRoute />}>
-          <Route path="user" element={<Dashboard />}></Route>
-          <Route path="user/orders" element={<Orders />}></Route>
-          <Route path="user/profile" element={<Profile />}></Route>
+          <Route path="user" element={<Dashboard />} />
+          <Route path="user/orders" element={<Orders />} />
+          <Route path="user/profile" element={<Profile />} />
         </Route>
         <Route path="/dashboard" element={<AdminRoute />}>
-          <Route path="admin" element={<AdminDashboard />}></Route>
-          <Route path="admin/create-product" element={<CreateProduct />}></Route>
-          <Route path="admin/product/:slug" element={<UpdateProduct />}></Route>
-          <Route path="admin/create-category" element={<CreateCategory />}></Route>
-          <Route path="admin/users" element={<Users />}></Route>
-          <Route path="admin/products" element={<Products />}></Route>
-
+          <Route path="admin" element={<AdminDashboard />} />
+          <Route path="admin/create-product" element={<CreateProduct />} />
+          <Route path="admin/product/:slug" element={<UpdateProduct />} />
+          <Route path="admin/create-category" element={<CreateCategory />} />
+          <Route path="admin/users" element={<Users />} />
+          <Route path="admin/products" element={<Products />} />
         </Route>
-        <Route path="/forgot-password" element={<ForgetPassword />}/>
-        <Route path="/register" element={<Register />}></Route>
-        <Route path="/about" element={<About />}></Route>
-        <Route path="/contact" element={<Contact />}></Route>
-        <Route path="/policy" element={<Policy />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="*" element={<PageNotFound />}></Route>
+        <Route path="/forgot-password" element={<ForgetPassword />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/policy" element={<Policy />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
   );

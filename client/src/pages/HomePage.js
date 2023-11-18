@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { Checkbox, Radio } from "antd";
 import { Prices } from "../Prices";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../context/cart";
 
 function HomePage() {
   const [products, setProducts] = useState([]);
@@ -15,13 +16,16 @@ function HomePage() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [cart, setCart] = useCart();
   const getTotal = async () => {
     try {
       const { data } = await axios.get(
         "http://localhost:8080/api/v1/product/product-count"
       );
       setTotal(data?.total);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const getAllCategory = async () => {
@@ -141,7 +145,7 @@ function HomePage() {
           <h1 className="text-center">All Products</h1>
           <div className="d-flex flex-wrap">
             {products?.map((p) => (
-              <div className="card m-2" style={{ width: "18rem" }}>
+              <div className="card m-2" style={{ width: "18rem" }} key={p._id}>
                 <img
                   className="card-img-top"
                   src={`http://localhost:8080/api/v1/product/product-photo/${p._id}`}
@@ -153,11 +157,18 @@ function HomePage() {
                   <p className="card-text">Rs. {p.price}</p>
                   <button
                     className="btn btn-primary ms-1"
-                    onClick={() => navigate(`/product/${p.slug}`)}
+                    onClick={() => navigate(`/product/${p.slug}`)
+
+                  }
                   >
                     More Details
                   </button>
-                  <button className="btn btn-secondary ms-1">
+                  <button
+                    className="btn btn-secondary ms-1"
+                    onClick={() => {setCart([...cart, p])
+                    localStorage.setItem('cart', JSON.stringify([...cart,p]))
+                    toast.success("Item added to cart")}}
+                  >
                     Add to Cart
                   </button>
                 </div>
