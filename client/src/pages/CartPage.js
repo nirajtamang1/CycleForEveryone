@@ -3,10 +3,10 @@ import Layout from "../components/Layout/Layout";
 import { useCart } from "../context/cart";
 import { useAuth } from "../context/auth";
 import { useNavigate } from "react-router-dom";
-
 function CartPage() {
+  const navigate = useNavigate();
   const [cart, setCart] = useCart();
-  const [auth, setAuth] = useAuth();
+  const [auth] = useAuth();
   //total Pirce
   const totalPrice = () => {
     try {
@@ -39,6 +39,7 @@ function CartPage() {
             <h1 className="text-center bg-light p-2 mb-1">
               {`Hello ${auth?.token && auth?.user?.name}`}
             </h1>
+
             <h4 className="text-center">
               {cart?.length >= 1
                 ? `You have ${cart.length} item in your cart ${
@@ -80,6 +81,34 @@ function CartPage() {
             <p>Total Checkout Payment</p>
             <hr />
             <h4>Total Price: {totalPrice()}</h4>
+
+            {auth?.user?.address ? (
+              <>
+                <div className="mb-3">
+                  <h3>Current Address</h3>
+                  <h4>{auth?.user?.address}</h4>
+                  <button
+                    className="btn btn-outline-primary"
+                    onClick={() => navigate("/dashboard/user/profile")}
+                  >
+                    Update Address
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className="mb-3">
+                <button
+                  className="btn btn-outline-warning"
+                  onClick={() =>
+                    navigate("/login", {
+                      state: "/cart",
+                    })
+                  }
+                >
+                  Please Login to checkout
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
