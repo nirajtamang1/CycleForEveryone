@@ -14,11 +14,11 @@ export const createProductController = async (req, res) => {
       case !description:
         return res.status(500).send({ message: "Description is required" });
       case !price:
-        return res.status(500).send({ message: "price is required" });
+        return res.status(500).send({ message: "Price is required" });
       case !category:
-        return res.status(500).send({ message: "category is required" });
+        return res.status(500).send({ message: "Category is required" });
       case !quantity:
-        return res.status(500).send({ message: "quantity is required" });
+        return res.status(500).send({ message: "Quantity is required" });
       case photo && photo.size > 1000000:
         return res
           .status(500)
@@ -36,7 +36,7 @@ export const createProductController = async (req, res) => {
       products,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(500).send({
       success: false,
       message: "Error in creating Product",
@@ -61,7 +61,7 @@ export const getProductController = async (req, res) => {
       products,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(500).send({
       success: false,
       message: "Error in Diaplaying all Product",

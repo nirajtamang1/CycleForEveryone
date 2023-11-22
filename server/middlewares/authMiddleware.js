@@ -11,7 +11,7 @@ export const requireSignIn = async (req, res, next) => {
     req.user = decode;
     next();
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(404).send({
       success: false,
       message: "Error in token verifaction",
@@ -33,6 +33,7 @@ export const isAdmin = async (req, res, next) => {
       next();
     }
   } catch (error) {
+    console.error(error);
     res.status(404).send({
       success: false,
       message: "Error in Admin Verification",
