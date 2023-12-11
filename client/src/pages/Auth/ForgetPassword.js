@@ -35,7 +35,7 @@ function ForgetPassword() {
 
   return (
     <Layout title="Forget Password">
-      <div>
+      <div style={{ background: "#508bfc" }}>
         <div className="register w-50">
           <h1 className="ml-5">Forget Password</h1>
           <form onSubmit={handleSubmit}>

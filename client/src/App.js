@@ -22,13 +22,15 @@ import ProductDetails from "./pages/ProductDetails";
 import { Categories } from "./pages/Categories";
 import CategoryProduct from "./pages/CategoryProduct";
 import CartPage from "./pages/CartPage";
+import Home from "./pages/Home";
 
 function App() {
   return (
     // div fragment
     <>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/homepage" element={<HomePage />} />
         <Route path="/product/:slug" element={<ProductDetails />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/cart" element={<CartPage />} />

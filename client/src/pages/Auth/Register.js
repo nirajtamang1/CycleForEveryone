@@ -35,7 +35,7 @@ function Register() {
   };
   return (
     <Layout title="Register Ecommerce">
-      <div>
+      <div style={{ background: "#508bfc" }}>
         <div className="register w-50">
           <h1 className="ml-5">Register Page</h1>
           <form onSubmit={handleSubmit}>

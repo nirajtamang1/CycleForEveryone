@@ -1,9 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&family=Red+Hat+Display:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,600&family=Poppins:wght@300;400&family=Red+Hat+Display:wght@300&display=swap");
+@import "react-alice-carousel/lib/alice-carousel.css";
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+:root {
+  --custom-color-blue: #007bff;
+  --hover-color-blue: #0056b3;
+  --text-color-light: #f8f9fa;
 }
 /* font-family: 'Poppins', sans-serif;
 font-family: 'Red Hat Display', sans-serif; */
@@ -12,21 +20,38 @@ font-family: 'Red Hat Display', sans-serif; */
 font-family: 'Poppins', sans-serif;
 font-family: 'Red Hat Display', sans-serif; */
 
-/* Header Navbar CSS */
+.custom-bg-color {
+  background-color: var(--custom-color-blue) !important;
+}
+
 .navbar {
   font-family: "Poppins", sans-serif;
   font-size: 17px;
   line-height: 26px;
   text-transform: uppercase;
-  box-shadow: 0 8px 6px -6px gray;
-  border-bottom: 0.3px solid gray !important;
+  box-shadow: 0 8px 6px -6px var(--hover-color-blue);
+  border-bottom: 0.3px solid var(--hover-color-blue) !important;
 }
 .nav-link {
   font-weight: 300 !important;
+  color: var(--text-color-light) !important;
+  transition: color 0.3s;
+}
+.nav-item a:hover {
+  color: var(--hover-color-blue) !important;
+}
+li .active {
+  border-bottom: 1px solid var(--text-color-light);
 }
 
-.active {
-  border-bottom: 1px solid black;
+.ant-badge-count {
+  background: var(--hover-color-blue) !important;
+  box-shadow: none !important;
+}
+.ant-badge .nav-item a {
+  margin-top: 4px;
+  font-weight: 450 !important;
+  font-size: 15px;
 }
 .nav-bar {
   font-weight: 700;
@@ -36,18 +61,38 @@ font-family: 'Red Hat Display', sans-serif; */
 
 /* Footer  */
 .footer {
-  color: white;
-  padding: 25px;
-  background: linear-gradient(to right, #434343, #000000);
+  color: var(--text-color-light);
+  padding: 20px;
+  background: var(--custom-color-blue);
 }
 .footer a {
   text-decoration: none;
-  color: white;
-  padding: 10px;
+  color: var(--text-color-light);
+  padding: 0px 10px;
 }
 .footer a:hover {
-  color: #ffefba;
-  border-bottom: 1px solid #ffefba;
+  color: var(--hover-color-blue) !important;
+  border-bottom: 1px solid var(--hover-color-blue);
+}
+
+/*slider */
+.carousel-inner {
+  /* background-image: var(--custom-color-blue); */
+  opacity: 0.8;
+  padding: 10px;
+}
+.carousel-item {
+  height: 300px !important;
+  overflow: "hidden";
+}
+
+/*card*/
+.card{
+  height: 350px!important;
+  overflow-x: auto;
+}
+.card-img-top{
+  height: 50%;
 }
 
 /* Page Not found */
@@ -81,7 +126,7 @@ font-family: 'Red Hat Display', sans-serif; */
 }
 
 /* Product Link  */
-.product-link{
+.product-link {
   text-decoration: none;
-  color:black;
+  color: black;
 }
