@@ -31,6 +31,36 @@ function CartPage() {
       console.log(error);
     }
   };
+  const eSewapayment = () => {
+    var path = "https://uat.esewa.com.np/epay/main";
+    var params = {
+      amt: totalPrice(),
+      psc: 0,
+      pdc: 0,
+      txAmt: 0,
+      tAmt: totalPrice(),
+      pid: "ee2c3ca1adfkj-696b-4cc5-lkjlk",
+      scd: "EPAYTEST",
+      su: "http://localhost:3000/users/esewa_payment_success",
+      fu: "http://localhost:3000/users/esewa_payment_failed",
+    };
+    console.log(params);
+    var form = document.createElement("form");
+    form.setAttribute("method", "POST");
+    form.setAttribute("action", path);
+
+    for (var key in params) {
+      var hiddenField = document.createElement("input");
+      hiddenField.setAttribute("type", "hidden");
+      hiddenField.setAttribute("name", key);
+      hiddenField.setAttribute("value", params[key]);
+      form.appendChild(hiddenField);
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+  };
+
   return (
     <Layout title="Booking app - Cart">
       <div className="container">
@@ -92,6 +122,13 @@ function CartPage() {
                     onClick={() => navigate("/dashboard/user/profile")}
                   >
                     Update Address
+                  </button>
+                  <br />
+                  <button
+                    className="btn btn-outline-primary mt-3"
+                    onClick={() => eSewapayment(cart)}
+                  >
+                    Payment
                   </button>
                 </div>
               </>
