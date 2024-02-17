@@ -38,7 +38,7 @@ function Home() {
             </p>
           </div>
           <div className="d-flex flex-wrap">
-            {products.map((p) => (
+            {products?.map((p) => (
               <div
                 className="card m-3 shadow"
                 style={{ width: "18rem" }}
