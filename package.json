@@ -1,6 +1,6 @@
 {
   "name": "Cycle For Everyone",
-  "proxy": "http://192.168.254.127:8080",
+  "proxy": "http://localhost:8080",
   "version": "1.0.0",
   "description": "Cycle For Everyone",
   "main": "index.js",

@@ -33,7 +33,7 @@ app.use("/api/v1/order", orderRoute);
 app.use("/api/v1/", esewaRoute);
 
 // app.listen(process.env.PORT, "192.168.254.127", () => {
-app.listen(process.env.PORT, "192.168.254.127", () => {
+app.listen(process.env.PORT, () => {
   console.log(
     `Server running on ${process.env.DEV_MODE} port number ${
       process.env.PORT || 8000
