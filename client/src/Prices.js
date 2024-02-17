@@ -1,34 +1,32 @@
-import React from "react";
-
 export const Prices = [
   {
     _id: 0,
-    name: "Rs 0 to 999",
-    array: [0, 999],
+    name: "Rs 0 to 20",
+    array: [0, 20],
   },
   {
     _id: 1,
-    name: "Rs 1000 to 1999",
-    array: [1000, 1999],
+    name: "Rs 21 to 40",
+    array: [21, 40],
   },
   {
     _id: 2,
-    name: "Rs 2000 to 2999",
-    array: [2000, 2999],
+    name: "Rs 41 to 60",
+    array: [41, 60],
   },
   {
     _id: 3,
-    name: "Rs 3000 to 3999",
-    array: [3000, 3999],
+    name: "Rs 61 to 80",
+    array: [61, 80],
   },
   {
     _id: 4,
-    name: "Rs 4000 to 4999",
-    array: [4000, 4999],
+    name: "Rs 81 to 100",
+    array: [81, 100],
   },
   {
     _id: 5,
-    name: "Rs 5000 to more",
-    array: [4000, 1000000],
+    name: "Rs 101 to more",
+    array: [101, 1000],
   },
 ];

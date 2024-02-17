@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&family=Red+Hat+Display:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,600&family=Poppins:wght@300;400&family=Red+Hat+Display:wght@300&display=swap");
-@import "react-alice-carousel/lib/alice-carousel.css";
 
 * {
   margin: 0;
@@ -9,92 +8,128 @@
 }
 
 :root {
-  --custom-color-blue: #007bff;
-  --hover-color-blue: #0056b3;
-  --text-color-light: #f8f9fa;
-}
-/* font-family: 'Poppins', sans-serif;
-font-family: 'Red Hat Display', sans-serif; */
-
-/* font-family: 'Playfair Display', serif;
-font-family: 'Poppins', sans-serif;
-font-family: 'Red Hat Display', sans-serif; */
-
-.custom-bg-color {
-  background-color: var(--custom-color-blue) !important;
+  --text-color-green: #0bba48;
+  --btn-bg-gray: #e9e6ed;
+  --text-color-white: #ffffff;
+  --text-color-black: #555555;
 }
 
-.navbar {
+body {
   font-family: "Poppins", sans-serif;
+}
+.navbar {
   font-size: 17px;
   line-height: 26px;
   text-transform: uppercase;
-  box-shadow: 0 8px 6px -6px var(--hover-color-blue);
-  border-bottom: 0.3px solid var(--hover-color-blue) !important;
+  box-shadow: 0 8px 6px -6px var(--text-color-black);
+  border-bottom: 0.3px solid var(--text-color-black) !important;
 }
 .nav-link {
-  font-weight: 300 !important;
-  color: var(--text-color-light) !important;
+  font-size: 20px;
+  color: var(--text-color-black) !important;
   transition: color 0.3s;
 }
-.nav-item a:hover {
-  color: var(--hover-color-blue) !important;
+
+li {
+  list-style-type: none;
 }
+
 li .active {
-  border-bottom: 1px solid var(--text-color-light);
+  color: var(--text-color-green) !important;
 }
 
 .ant-badge-count {
-  background: var(--hover-color-blue) !important;
+  margin-top: 10px;
+  background: var(--text-color-green) !important;
   box-shadow: none !important;
 }
-.ant-badge .nav-item a {
-  margin-top: 4px;
-  font-weight: 450 !important;
-  font-size: 15px;
-}
-.nav-bar {
-  font-weight: 700;
-  font-family: "roboto", "sans-serif";
-  letter-spacing: 3px;
+
+.nav-item .badge {
+  font-weight: 400;
+  font-size: 20px !important;
+  font-family: "Poppins", sans-serif !important;
+  padding-top: 10px;
+  padding-left: 0px;
 }
 
 /* Footer  */
 .footer {
-  color: var(--text-color-light);
   padding: 20px;
-  background: var(--custom-color-blue);
+  color: var(--text-color-white);
+  background-color: var(--text-color-black) !important;
 }
 .footer a {
   text-decoration: none;
-  color: var(--text-color-light);
+  color: var(--text-color-white);
   padding: 0px 10px;
 }
 .footer a:hover {
-  color: var(--hover-color-blue) !important;
-  border-bottom: 1px solid var(--hover-color-blue);
+  color: var(--text-color-green) !important;
+  border-bottom: 1px solid var(--text-color-green);
 }
 
-/*slider */
-.carousel-inner {
-  /* background-image: var(--custom-color-blue); */
-  opacity: 0.8;
-  padding: 10px;
+/* banner */
+.banner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-.carousel-item {
-  height: 300px !important;
-  overflow: "hidden";
+.banner h1 {
+  font-weight: 700;
+  font-family: "roboto", "sans-serif";
+  letter-spacing: 3px;
+}
+.banner p {
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+}
+.button {
+  color: var(--text-color-white);
+  padding: 15px 20px;
+  background-color: var(--text-color-green);
+  border: 1px solid var(--text-color-green);
+  border-radius: 5px;
+}
+.button:hover {
+  background-color: var(--text-color-black);
 }
 
-/*card*/
-.card{
-  height: 350px!important;
-  overflow-x: auto;
+.login {
+  margin-top: 50px;
 }
-.card-img-top{
-  height: 50%;
+.cartbtn {
+  padding: 5px 0px;
+  border: 0px solid var(--btn-bg-gray);
+  background-color: var(--btn-bg-gray);
+}
+.cartbtn:hover {
+  background-color: var(--text-color-green);
+}
+/* home products */
+.producttitle {
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-color-green) !important;
+  font-family: "Poppins", sans-serif;
+}
+.homeaboutus {
+  background-color: var(--btn-bg-gray);
+  padding-top: 20px;
+  box-shadow: 0 8px 6px -6px var(--btn-bg-gray);
+  border-bottom: 0.3px solid var(--btn-bg-gray) !important;
 }
 
+/* Contact us */
+.contactus {
+  margin: 20px;
+  padding: 5px;
+  width: 50%;
+  height: 70%;
+  background-color: var(--text-color-white);
+  color: var(--text-color-black);
+}
 /* Page Not found */
 .PageNotFound {
   display: flex;
@@ -113,16 +148,6 @@ li .active {
   margin-top: 50px;
   color: white;
   background-color: black;
-}
-
-/* Register Page */
-.register {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  justify-content: center;
-  min-height: 75vh;
-  margin-left: 25%;
 }
 
 /* Product Link  */

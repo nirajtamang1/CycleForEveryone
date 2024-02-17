@@ -10,7 +10,6 @@ function Register() {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
-  const [answer, setAnswer] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
@@ -18,10 +17,13 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "http://localhost:8080/api/v1/auth/register",
-        { name, phone, address, email, password, answer }
-      );
+      const res = await axios.post("/api/v1/auth/register", {
+        name,
+        phone,
+        address,
+        email,
+        password,
+      });
 
       if (res.data.success) {
         toast.success(res.data.message);
@@ -34,11 +36,25 @@ function Register() {
     }
   };
   return (
-    <Layout title="Register Ecommerce">
-      <div style={{ background: "#508bfc" }}>
-        <div className="register w-50">
-          <h1 className="ml-5">Register Page</h1>
-          <form onSubmit={handleSubmit}>
+    <Layout title="Register-Cycle For Eveyone">
+      <div
+        className="d-flex justify-content-center align-items-center mx-auto text-center"
+        style={{ backgroundColor: "#0bba48", height: "85vh" }}
+      >
+        <div
+          className="login p-5 shadow border text-center"
+          style={{
+            backgroundColor: "#ffffff",
+            borderRadius: "10px",
+            padding: "30px",
+            color: "#555555",
+          }}
+        >
+          <form
+            onSubmit={handleSubmit}
+            className="p-3 shadow border text-center"
+          >
+            <h1>Register Page</h1>
             <div className="mb-3">
               <input
                 type="text"
@@ -52,7 +68,7 @@ function Register() {
             </div>
             <div className="mb-3">
               <input
-                type="text"
+                type="number"
                 value={phone}
                 onChange={(e) => {
                   setPhone(e.target.value);
@@ -78,20 +94,7 @@ function Register() {
             </div>
             <div className="mb-3">
               <input
-                type="text"
-                value={answer}
-                onChange={(e) => {
-                  setAnswer(e.target.value);
-                }}
-                className="form-control"
-                id="exampleInputAnswer"
-                aria-describedby="emailHelp"
-                placeholder="Enter your favourite food"
-              />
-            </div>
-            <div className="mb-3">
-              <input
-                type="text"
+                type="email"
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
@@ -115,7 +118,7 @@ function Register() {
                 placeholder="Enter your password"
               />
             </div>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="button btn-primary w-100">
               Submit
             </button>
           </form>

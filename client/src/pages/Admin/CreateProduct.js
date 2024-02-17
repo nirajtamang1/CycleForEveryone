@@ -7,63 +7,63 @@ import { Select } from "antd";
 import { useNavigate } from "react-router-dom";
 
 const { Option } = Select;
+
 function CreateProduct() {
   const navigate = useNavigate();
+  const [rfid, setRfid] = useState("");
   const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [quantity, setQuantity] = useState("");
-  const [shipping, setShipping] = useState("");
   const [photo, setPhoto] = useState("");
-  //get all categories
+
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get(
-        "http://localhost:8080/api/v1/category/get-category"
-      );
+      const { data } = await axios.get("/api/v1/category/get-category");
       if (data?.success) {
         setCategories(data?.category);
       }
     } catch (error) {
       console.log(error);
-      toast.error("Sometthing went wrong");
+      toast.error("Something went wrong while fetching categories");
     }
   };
+
   useEffect(() => {
     getAllCategory();
   }, []);
-  // create function
+
   const handleCreate = async (e) => {
     e.preventDefault();
     try {
       const productData = new FormData();
+      productData.append("rfid", rfid);
       productData.append("name", name);
       productData.append("description", description);
       productData.append("price", price);
-      productData.append("quantity", quantity);
       productData.append("photo", photo);
       productData.append("category", category);
 
       const { data } = await axios.post(
-        "http://localhost:8080/api/v1/product/create-product",
+        "/api/v1/product/create-product",
         productData
       );
       if (data?.success) {
-        toast.success("Product created Successfully");
+        toast.success("Product created successfully");
         navigate("/dashboard/admin/products");
       } else {
         toast.error(data?.message);
       }
     } catch (error) {
       console.log(error);
-      toast.error("Error while creating Product");
+      toast.error("Error while creating product");
     }
   };
+
   return (
     <Layout title={"Dashboard - Create Product"}>
-      <div className="container-fluid -3 p-3">
+      <div className="container mt-3">
         <div className="row">
           <div className="col-md-3">
             <AdminMenu />
@@ -88,86 +88,63 @@ function CreateProduct() {
                 ))}
               </Select>
               <div className="mb-3">
-                <label className="btn btn-outline-secondary col-md-12">
-                  {photo ? photo.name : "Upload Photo"}
-                  <input
-                    type="file"
-                    name="photo"
-                    id=""
-                    accept="image/*"
-                    onChange={(e) => setPhoto(e.target.files[0])}
-                    hidden
-                  />
-                </label>
-              </div>
-              <div className="mb-3">
-                {photo && (
-                  <div className="text-center">
-                    <img
-                      src={URL.createObjectURL(photo)}
-                      alt="product_photo"
-                      height={"200px"}
-                      className="img img-responsive"
-                    />
-                  </div>
-                )}
-              </div>
-              <div className="mb-3">
-                <input
-                  type="text"
-                  value={name}
-                  placeholder="Enter Product name"
-                  className="form-control"
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </div>
-              <div className="mb-3">
-                <input
-                  type="text"
-                  value={description}
-                  placeholder="Enter Product Description"
-                  className="form-control"
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-              </div>
-              <div className="mb-3">
-                <input
-                  type="number"
-                  value={price}
-                  placeholder="Enter your price"
-                  className="form-control"
-                  onChange={(e) => setPrice(e.target.value)}
-                />
-              </div>
-              <div className="mb-3">
-                <input
-                  type="number"
-                  value={quantity}
-                  placeholder="Write quantity"
-                  className="form-control"
-                  onChange={(e) => setQuantity(e.target.value)}
-                />
-              </div>
-              <div className="mb-3">
-                <Select
-                  bordered={false}
-                  placeholder="Select Shipping "
-                  size="large"
-                  showSearch
-                  className="form-select mb-3"
-                  onChange={(value) => {
-                    setShipping(value);
-                  }}
+                <label
+                  htmlFor="photo"
+                  className="btn btn-outline-secondary col-md-12"
                 >
-                  <Option value="0">No</Option>
-                  <Option value="1">Yes</Option>
-                </Select>
+                  {photo ? photo.name : "Upload Photo"}
+                </label>
+                <input
+                  type="file"
+                  name="photo"
+                  id="photo"
+                  accept="image/*"
+                  onChange={(e) => setPhoto(e.target.files[0])}
+                  hidden
+                />
               </div>
-              <div className="mb-3">
-                <button className="btn btn-primary" onClick={handleCreate}>
-                  Create Product
-                </button>
-              </div>
+              {photo && (
+                <div className="mb-3">
+                  <img
+                    src={URL.createObjectURL(photo)}
+                    alt="product_photo"
+                    height="200px"
+                    className="img img-responsive"
+                  />
+                </div>
+              )}
+              <input
+                type="text"
+                value={rfid}
+                placeholder="Enter RFID"
+                className="form-control mb-3"
+                onChange={(e) => setRfid(e.target.value)}
+              />
+              <input
+                type="text"
+                value={name}
+                placeholder="Enter Product Name"
+                className="form-control mb-3"
+                onChange={(e) => setName(e.target.value)}
+              />
+              <input
+                type="text"
+                value={description}
+                placeholder="Enter Product Description"
+                className="form-control mb-3"
+                onChange={(e) => setDescription(e.target.value)}
+              />
+              <input
+                type="number"
+                value={price}
+                placeholder="Enter Price"
+                className="form-control mb-3"
+                onChange={(e) => setPrice(e.target.value)}
+              />
+             
+              <button className="btn btn-primary" onClick={handleCreate}>
+                Create Product
+              </button>
             </div>
           </div>
         </div>

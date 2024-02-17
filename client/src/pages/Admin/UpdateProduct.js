@@ -12,11 +12,10 @@ function UpdateProduct() {
   const params = useParams();
   const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState("");
+  const [rfid, setRfid] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [quantity, setQuantity] = useState("");
-  const [shipping, setShipping] = useState("");
   const [photo, setPhoto] = useState("");
   const [id, setId] = useState("");
 
@@ -24,14 +23,13 @@ function UpdateProduct() {
   const getSingleProduct = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:8080/api/v1/product/get-product/${params.slug}`
+        `/api/v1/product/get-product/${params.slug}`
       );
       setId(data.product._id);
+      setRfid(data.product.rfid);
       setName(data.product.name);
       setDescription(data.product.description);
       setPrice(data.product.price);
-      setQuantity(data.product.quantity);
-      setShipping(data.product.shipping);
       setCategory(data.product.category._id);
     } catch (error) {}
   };
@@ -41,9 +39,7 @@ function UpdateProduct() {
   //get all categories
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get(
-        "http://localhost:8080/api/v1/category/get-category"
-      );
+      const { data } = await axios.get("/api/v1/category/get-category");
       if (data?.success) {
         setCategories(data?.category);
       }
@@ -60,15 +56,15 @@ function UpdateProduct() {
     e.preventDefault();
     try {
       const productData = new FormData();
+      productData.append("rfid", rfid);
       productData.append("name", name);
       productData.append("description", description);
       productData.append("price", price);
-      productData.append("quantity", quantity);
       photo && productData.append("photo", photo);
       productData.append("category", category);
 
       const { data } = await axios.put(
-        `http://localhost:8080/api/v1/product/update-product/${id}`,
+        `/api/v1/product/update-product/${id}`,
         productData
       );
       if (data?.success) {
@@ -88,9 +84,7 @@ function UpdateProduct() {
     try {
       let answer = window.prompt("Enter yes to delete product");
       if (!answer) return;
-      const { data } = await axios.delete(
-        `http://localhost:8080/api/v1/product/delete-product/${id}`
-      );
+      await axios.delete(`/api/v1/product/delete-product/${id}`);
       toast.success("Product delete sucessfullly");
       navigate("/dashboard/admin/products");
     } catch (error) {
@@ -99,7 +93,7 @@ function UpdateProduct() {
   };
   return (
     <Layout title={"Dashboard - Create Product"}>
-      <div className="container-fluid -3 p-3">
+      <div className="container mt-3">
         <div className="row">
           <div className="col-md-3">
             <AdminMenu />
@@ -150,12 +144,21 @@ function UpdateProduct() {
                 ) : (
                   <div className="text-center">
                     <img
-                      src={`http://localhost:8080/api/v1/product/product-photo/${id}`}
+                      src={`/api/v1/product/product-photo/${id}`}
                       height={"200px"}
                       className="img img-responsive"
                     />
                   </div>
                 )}
+              </div>
+              <div className="mb-3">
+                <input
+                  type="number"
+                  value={rfid}
+                  placeholder="Enter Rfid name"
+                  className="form-control"
+                  onChange={(e) => setRfid(e.target.value)}
+                />
               </div>
               <div className="mb-3">
                 <input
@@ -184,31 +187,7 @@ function UpdateProduct() {
                   onChange={(e) => setPrice(e.target.value)}
                 />
               </div>
-              <div className="mb-3">
-                <input
-                  type="number"
-                  value={quantity}
-                  placeholder="Write quantity"
-                  className="form-control"
-                  onChange={(e) => setQuantity(e.target.value)}
-                />
-              </div>
-              <div className="mb-3">
-                <Select
-                  bordered={false}
-                  placeholder="Select Shipping "
-                  size="large"
-                  showSearch
-                  className="form-select mb-3"
-                  onChange={(value) => {
-                    setShipping(value);
-                  }}
-                  value={shipping ? "yes" : "No"}
-                >
-                  <Option value="0">No</Option>
-                  <Option value="1">Yes</Option>
-                </Select>
-              </div>
+
               <div className="mb-3">
                 <button className="btn btn-primary" onClick={handleUpdate}>
                   Update Product

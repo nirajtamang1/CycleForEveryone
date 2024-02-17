@@ -1,54 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../components/Layout/Layout";
 import AdminMenu from "../../components/Layout/AdminMenu";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Users() {
   const navigate = useNavigate();
-  const [user, setUser] = useState([]);
-  const getAllUser = async () => {
+  const [users, setUsers] = useState([]);
+
+  const getAllUsers = async () => {
     try {
-      const { data } = await axios.get(
-        " http://localhost:8080/api/v1/user/get-user"
-      );
+      const { data } = await axios.get("/api/v1/user/get-user");
       if (data?.success) {
-        setUser(data?.user);
+        setUsers(data?.user);
       }
     } catch (error) {
       console.log(error);
-      toast.error("Some this went wrong while getting user information");
+      toast.error("Something went wrong while fetching user information");
     }
   };
+
   useEffect(() => {
-    getAllUser();
+    getAllUsers();
   }, []);
-  const handleDelete = async (pid) => {
+
+  const handleDelete = async (userId) => {
     try {
-      await axios.delete(
-        `http://localhost:8080/api/v1/user/delete-user/${pid}`
-      );
-      toast.success("Delete User Successfully");
-      getAllUser();
+      await axios.delete(`/api/v1/user/delete-user/${userId}`);
+      toast.success("User deleted successfully");
+      getAllUsers();
     } catch (error) {
-      toast.error("Error while deleting User information");
+      console.log(error);
+      toast.error("Error while deleting user information");
     }
   };
+
   return (
     <Layout title={"Dashboard - All Users"}>
-      {console.log(user)}
-      <div className="container-fluid -3 p-3">
+      <div className="container mt-3">
         <div className="row">
           <div className="col-md-3">
             <AdminMenu />
           </div>
           <div className="col-md-9">
-            <h1>All Users</h1>
-
-            <div className="w-75">
-              <table className="table">
+            <h1 className="mb-4">All Users</h1>
+            <div className="table-responsive">
+              <table className="table table-striped">
                 <thead>
                   <tr>
                     <th scope="col">Name</th>
@@ -59,28 +57,28 @@ function Users() {
                   </tr>
                 </thead>
                 <tbody>
-                  {user?.map((c) => (
-                    <tr>
-                      <>
-                        <td key={c._id}>{c.name}</td>
-                        <td key={c._id}>{c.phone}</td>
-                        <td key={c._id}>{c.address}</td>
-                        <td key={c._id}>{c.email}</td>
-                        <td>
-                          <button
-                            className="btn btn-primary ms-3"
-                            onClick={() => navigate("/dashboard/user/profile")}
-                          >
-                            Edit
-                          </button>
-                          <button
-                            className="btn btn-danger ms-3"
-                            onClick={() => handleDelete(c._id)}
-                          >
-                            Delete
-                          </button>
-                        </td>
-                      </>
+                  {users.map((user) => (
+                    <tr key={user._id}>
+                      <td>{user.name}</td>
+                      <td>{user.phone}</td>
+                      <td>{user.address}</td>
+                      <td>{user.email}</td>
+                      <td>
+                        <button
+                          className="btn btn-primary me-2"
+                          onClick={() =>
+                            navigate(`/dashboard/admin/users/${user._id}`)
+                          }
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="btn btn-danger"
+                          onClick={() => handleDelete(user._id)}
+                        >
+                          Delete
+                        </button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>

@@ -1,79 +1,50 @@
 import React from "react";
-import Layout from "../../components/Layout/Layout";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
 import axios from "axios";
+import toast from "react-hot-toast";
+import Layout from "../../components/Layout/Layout";
 
-function ForgetPassword() {
-  const [email, setEmail] = useState("");
-  const [answer, setAnswer] = useState("");
-  const [newPassword, setNewPassword] = useState("");
+function ForgotPassword() {
+  const [email, setEmail] = useState();
   const navigate = useNavigate();
-
+  axios.defaults.withCredentials = true;
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "http://localhost:8080/api/v1/auth/forget-password",
-        {
-          email,
-          answer,
-          newPassword,
-        }
-      );
-      if (res.data.success) {
-        toast.success(res.data.message);
-        navigate("/login");
-      } else {
-        toast.error("Invalid information");
-      }
+      await axios.post("/api/v1/auth/forget-password", { email });
+      toast.success("Please check your mail for reset password link!");
+      navigate("/login");
     } catch (error) {
       toast.error("Reset Failed");
+      console.error("Error submitting form: ", error);
     }
   };
 
   return (
-    <Layout title="Forget Password">
-      <div style={{ background: "#508bfc" }}>
-        <div className="register w-50">
-          <h1 className="ml-5">Forget Password</h1>
+    <Layout>
+      <div
+        className="d-flex justify-content-center align-items-center mx-auto"
+        style={{ backgroundColor: "#0bba48", height: "75vh", color: "#555555" }}
+      >
+        <div className="bg-white p-3 rounded w-40">
+          <h4>Forgot Password</h4>
           <form onSubmit={handleSubmit}>
-            <div className="mb-3">
+            <div className="pt-4 mb-3">
+              <label htmlFor="email" className="pb-2">
+                <strong>Email</strong>
+              </label>
               <input
-                type="text"
-                className="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                placeholder="Enter your email"
-                value={email}
+                type="email"
+                placeholder="Enter Email"
+                autoComplete="off"
+                name="email"
+                className="form-control rounded-0"
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-
-            <div className="mb-3">
-              <input
-                type="text"
-                className="form-control"
-                id="exampleInputFood"
-                aria-describedby="emailHelp"
-                placeholder="Enter your Favourite Food"
-                value={answer}
-                onChange={(e) => setAnswer(e.target.value)}
-              />
-            </div>
-            <div className="mb-3">
-              <input
-                type="password"
-                className="form-control"
-                id="exampleInputPassword1"
-                placeholder="Enter your password"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-              />
-            </div>
-            <button type="submit" className="btn btn-primary">
-              Reset
+            <button type="submit" className="button mb-2 w-100">
+              Send
             </button>
           </form>
         </div>
@@ -82,4 +53,4 @@ function ForgetPassword() {
   );
 }
 
-export default ForgetPassword;
+export default ForgotPassword;

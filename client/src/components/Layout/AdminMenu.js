@@ -26,6 +26,9 @@ function AdminMenu() {
           <NavLink to="/dashboard/admin/users" className="list-group-item">
             Users
           </NavLink>
+          <NavLink to="/dashboard/admin/order" className="list-group-item">
+            Order
+          </NavLink>
         </ul>
       </div>
     </>
