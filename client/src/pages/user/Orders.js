@@ -52,7 +52,8 @@ function Orders() {
           <ul>
             {order.products.map((product, index) => (
               <li key={index}>
-                Name: {product.name}, Price: {product.price}, Duration: {product.duration}, data:
+                Name: {product.name}, Price: {product.price}, Duration:{" "}
+                {product.duration}, data:
                 {product.selectedDateTime}
               </li>
             ))}
@@ -84,7 +85,6 @@ function Orders() {
   return (
     <Layout title="Order- Cycle For Everyone">
       <div className="container mt-3">
-        <h1>This is user</h1>
         <div className="row">
           <div className="col-md-3">
             <UsersMenu />

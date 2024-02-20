@@ -1,6 +1,6 @@
 {
   "name": "Cycle For Everyone",
-  "proxy": "http://localhost:8080",
+  "proxy": "https://cycleforeveryone.onrender.com",
   "version": "1.0.0",
   "description": "Cycle For Everyone",
   "main": "index.js",

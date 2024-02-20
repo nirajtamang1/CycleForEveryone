@@ -107,7 +107,7 @@ function CartPage() {
         toast.success("Booked successful");
         localStorage.removeItem("cart");
         setCart([]);
-      
+
         navigate("/dashboard/user/orders");
       } else {
         console.error("Cash payment failed.");
@@ -173,7 +173,7 @@ function CartPage() {
                 <h5 className="card-title">Cart Summary</h5>
                 <p className="card-text">Total Checkout Payment</p>
                 <hr />
-                <h5 className="card-text">Total Price: {totalPrice()}</h5>
+                <h5 className="card-text">Total Price: Rs. {totalPrice()}</h5>
                 {auth?.user?.address ? (
                   <>
                     <button

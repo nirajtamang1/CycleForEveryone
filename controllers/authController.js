@@ -40,7 +40,6 @@ export const registerController = async (req, res) => {
       password: hashedPassword,
       phone,
       address,
-     
     }).save();
     res.status(201).send({
       success: true,
@@ -124,13 +123,13 @@ export const forgetPasswordController = async (req, res) => {
     var transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "waibaniraj208@gmail.com",
-        pass: "lzvc yfyj iird ervg",
+        user: "cyclesforeveryone@gmail.com",
+        pass: "vcnb maxe whyi hjnr",
       },
     });
 
     var mailOptions = {
-      from: "Cycle For Everyone <waibaniraj208@gmail.com>",
+      from: "Cycle For Everyone <cyclesforeveryone@gmail.com>",
       to: oldUser.email,
       subject: "Password Reset",
       html: `

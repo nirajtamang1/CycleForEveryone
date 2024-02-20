@@ -131,7 +131,11 @@ function ProductDetails() {
               ))}
             </select>
             <button
-              className="btn ms-2"
+              className="ms-2 p-2"
+              style={{
+                backgroundColor: "#0bba48",
+                border: "0px solid black",
+              }}
               onClick={() => {
                 const updatedProduct = {
                   ...product,
@@ -168,7 +172,7 @@ function ProductDetails() {
                   <p className="card-text">{p.description.substring(0, 50)}</p>
                   <p className="card-text">Rs. {p.price}</p>
                   <button
-                    className="btn ms-1 w-100"
+                    className="cartbtn  ms-1 w-100"
                     onClick={() => navigate(`/product/${p.slug}`)}
                   >
                     View More
