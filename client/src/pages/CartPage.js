@@ -41,10 +41,13 @@ function CartPage() {
 
   const handleOnlinePayment = async () => {
     try {
-      const response = await axios.post("/api/v1/product/payment", {
-        amount: totalPrice(),
-        orderId: pId,
-      });
+      const response = await axios.post(
+        process.env.REACT_APP_API_URL + "/api/v1/product/payment",
+        {
+          amount: totalPrice(),
+          orderId: pId,
+        }
+      );
       const { path, params } = response.data;
       setPaymentUrl(path);
       const form = document.createElement("form");
@@ -76,12 +79,15 @@ function CartPage() {
   const onlineBooked = async () => {
     try {
       const username = auth?.user?.name;
-      await axios.post("/api/v1/product/booking", {
-        orderId: pId,
-        totalAmount: totalPrice(),
-        cart: cart,
-        username: username,
-      });
+      await axios.post(
+        process.env.REACT_APP_API_URL + "/api/v1/product/booking",
+        {
+          orderId: pId,
+          totalAmount: totalPrice(),
+          cart: cart,
+          username: username,
+        }
+      );
       localStorage.removeItem("cart");
       setCart([]);
     } catch (error) {
@@ -94,13 +100,16 @@ function CartPage() {
       console.log(auth);
       const username = auth?.user?.name;
       const email = auth?.user?.email;
-      const response = await axios.post("/api/v1/product/booking", {
-        orderId: pId,
-        totalAmount: totalPrice(),
-        cart: cart,
-        username: username,
-        email: email,
-      });
+      const response = await axios.post(
+        process.env.REACT_APP_API_URL + "/api/v1/product/booking",
+        {
+          orderId: pId,
+          totalAmount: totalPrice(),
+          cart: cart,
+          username: username,
+          email: email,
+        }
+      );
       if (response.data.success) {
         // API call was successful
         // console.log("Cash payment successful.");
@@ -144,18 +153,17 @@ function CartPage() {
                 <div className="col-md-4">
                   <img
                     className="card-img-top"
-                    src={`/api/v1/product/product-photo/${p._id}`}
+                    src={`${process.env.REACT_APP_API_URL}/api/v1/product/product-photo/${p._id}`}
                     alt={p.name}
                     width="100px"
                   />
                 </div>
                 <div className="col-md-8">
                   <div>
-                    <h4>{p.name}</h4>
-                    <div>{p.description.substring(0, 30)}</div>
+                    <h4>{p?.name}</h4>
                     <div>{p?.selectedDateTime?.toLocaleString()}</div>
-                    <div>{p.duration}</div>
-                    <h4>Price: {p.price}</h4>
+                    <div>{p?.duration}</div>
+                    <h4>Price: {p?.price}</h4>
                   </div>
                   <button
                     className="btn btn-danger"

@@ -10,7 +10,9 @@ function Products() {
   //getAll Products
   const getAllProducts = async () => {
     try {
-      const { data } = await axios.get("/api/v1/product/get-product");
+      const { data } = await axios.get(
+        process.env.REACT_APP_API_URL + "/api/v1/product/get-product"
+      );
       setProducts(data.products);
     } catch (error) {
       console.log(error);
@@ -33,13 +35,13 @@ function Products() {
               {products?.map((p) => (
                 <Link
                   key={p._id}
-                  to={`/dashboard/admin/product/${p.slug}`}
+                  to={`${process.env.REACT_APP_API_URL}/dashboard/admin/product/${p.slug}`}
                   className="product-link"
                 >
                   <div className="card m-2" style={{ width: "18rem" }}>
                     <img
                       className="card-img-top"
-                      src={`/api/v1/product/product-photo/${p._id}`}
+                      src={`${process.env.REACT_APP_API_URL}/api/v1/product/product-photo/${p._id}`}
                       alt={p.name}
                     />
                     <div className="card-body">

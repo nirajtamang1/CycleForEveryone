@@ -3,9 +3,9 @@ import Layout from "../../components/Layout/Layout";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 import toast from "react-hot-toast";
-
 import { useAuth } from "../../context/auth";
 import UsersMenu from "../../components/Layout/UserMenu";
+import Bill from "./Bill";
 
 function Orders() {
   const [auth] = useAuth();
@@ -16,7 +16,9 @@ function Orders() {
   useEffect(() => {
     async function fetchOrders() {
       try {
-        const response = await axios.get("/api/v1/order/getAllOrder");
+        const response = await axios.get(
+          process.env.REACT_APP_API_URL + "/api/v1/order/getAllOrder"
+        );
         setOrders(response.data);
       } catch (error) {
         console.error("Error fetching orders:", error);
@@ -26,10 +28,6 @@ function Orders() {
     fetchOrders();
   }, []);
   const usernames = orders.map((order) => order.email);
-
-  console.log(usernames);
-  console.log("THis is Order", usernames);
-  console.log("THIS IS", auth?.user?.email);
 
   const filteredOrders = orders.filter((order) => {
     return auth?.user?.email === order.email;
@@ -60,9 +58,10 @@ function Orders() {
           </ul>
         </td>
         <td>
+          <Bill order={order} />
           <button
-            onClick={() => handleDelete(order._id)}
-            className="btn btn-danger"
+            onClick={() => handleDelete(order)}
+            className="btn btn-danger my-2"
           >
             Delete
           </button>
@@ -72,7 +71,7 @@ function Orders() {
   console.log(displayOrders);
   const handleDelete = async (orderId) => {
     try {
-      await axios.delete(`/api/v1/order/deleteOrder/${orderId}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/order/deleteOrder/${orderId}`);
       // Update orders state after deletion
       const updatedOrders = orders.filter((order) => order._id !== orderId);
       setOrders(updatedOrders);
@@ -83,25 +82,27 @@ function Orders() {
   };
 
   return (
-    <Layout title="Order- Cycle For Everyone">
+    <Layout title="Order -Cycle For Everyone">
       <div className="container mt-3">
         <div className="row">
           <div className="col-md-3">
             <UsersMenu />
           </div>
           <div className="col-md-9">
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>Username</th>
-                  <th>Payment</th>
+            <div className="table-responsive">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>Username</th>
+                    <th>Payment</th>
 
-                  <th>Products</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>{displayOrders}</tbody>
-            </table>
+                    <th>Products</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>{displayOrders}</tbody>
+              </table>
+            </div>
             <ReactPaginate
               previousLabel={"Previous"}
               nextLabel={"Next"}

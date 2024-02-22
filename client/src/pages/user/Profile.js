@@ -28,13 +28,16 @@ function Profile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.put("/api/v1/auth/profile", {
-        name,
-        phone,
-        address,
-        email,
-        password,
-      });
+      const { data } = await axios.put(
+        process.env.REACT_APP_API_URL + "/api/v1/auth/profile",
+        {
+          name,
+          phone,
+          address,
+          email,
+          password,
+        }
+      );
       if (data?.error) {
         toast.error(data?.error);
       } else {
@@ -53,7 +56,7 @@ function Profile() {
   const deleteProfile = async (email) => {
     try {
       console.log(email);
-      await axios.delete(`/api/v1/user/deleteuser/${email}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/user/deleteuser/${email}`);
       toast.success("User deleted successfully");
       setAuth({
         ...auth,

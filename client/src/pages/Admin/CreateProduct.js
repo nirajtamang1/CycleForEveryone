@@ -20,7 +20,9 @@ function CreateProduct() {
 
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("/api/v1/category/get-category");
+      const { data } = await axios.get(
+        process.env.REACT_APP_API_URL + "/api/v1/category/get-category"
+      );
       if (data?.success) {
         setCategories(data?.category);
       }
@@ -46,7 +48,7 @@ function CreateProduct() {
       productData.append("category", category);
 
       const { data } = await axios.post(
-        "/api/v1/product/create-product",
+        process.env.REACT_APP_API_URL + "/api/v1/product/create-product",
         productData
       );
       if (data?.success) {
@@ -141,7 +143,7 @@ function CreateProduct() {
                 className="form-control mb-3"
                 onChange={(e) => setPrice(e.target.value)}
               />
-             
+
               <button className="btn btn-primary" onClick={handleCreate}>
                 Create Product
               </button>

@@ -39,7 +39,9 @@ function UpdateProduct() {
   //get all categories
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("/api/v1/category/get-category");
+      const { data } = await axios.get(
+        process.env.REACT_APP_API_URL + "/api/v1/category/get-category"
+      );
       if (data?.success) {
         setCategories(data?.category);
       }
@@ -84,7 +86,9 @@ function UpdateProduct() {
     try {
       let answer = window.prompt("Enter yes to delete product");
       if (!answer) return;
-      await axios.delete(`/api/v1/product/delete-product/${id}`);
+      await axios.delete(
+        `${process.env.REACT_APP_API_URL}/api/v1/product/delete-product/${id}`
+      );
       toast.success("Product delete sucessfullly");
       navigate("/dashboard/admin/products");
     } catch (error) {
@@ -144,7 +148,7 @@ function UpdateProduct() {
                 ) : (
                   <div className="text-center">
                     <img
-                      src={`/api/v1/product/product-photo/${id}`}
+                      src={`${process.env.REACT_APP_API_URL}/api/v1/product/product-photo/${id}`}
                       height={"200px"}
                       className="img img-responsive"
                     />

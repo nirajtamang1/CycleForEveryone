@@ -11,7 +11,9 @@ function Users() {
 
   const getAllUsers = async () => {
     try {
-      const { data } = await axios.get("/api/v1/user/get-user");
+      const { data } = await axios.get(
+        process.env.REACT_APP_API_URL + "/api/v1/user/get-user"
+      );
       if (data?.success) {
         setUsers(data?.user);
       }
@@ -27,7 +29,7 @@ function Users() {
 
   const handleDelete = async (userId) => {
     try {
-      await axios.delete(`/api/v1/user/delete-user/${userId}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/user/delete-user/${userId}`);
       toast.success("User deleted successfully");
       getAllUsers();
     } catch (error) {

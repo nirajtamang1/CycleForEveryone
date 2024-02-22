@@ -16,7 +16,9 @@ function HomePage() {
   const navigate = useNavigate();
   const getTotal = async () => {
     try {
-      const { data } = await axios.get("/api/v1/product/product-count");
+      const { data } = await axios.get(
+        process.env.REACT_APP_API_URL + "/api/v1/product/product-count"
+      );
       setTotal(data?.total);
     } catch (error) {
       console.log(error);
@@ -25,7 +27,9 @@ function HomePage() {
 
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("/api/v1/category/get-category");
+      const { data } = await axios.get(
+        process.env.REACT_APP_API_URL + "/api/v1/category/get-category"
+      );
       if (data?.success) {
         setCategories(data?.category);
       }
@@ -42,7 +46,9 @@ function HomePage() {
   const getAllProducts = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`/api/v1/product/product-list/${page}`);
+      const { data } = await axios.get(
+        process.env.REACT_APP_API_URL + `/api/v1/product/product-list/${page}`
+      );
       setLoading(false);
       setProducts(data.products);
     } catch (error) {
@@ -60,7 +66,9 @@ function HomePage() {
   const loadMore = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`/api/v1/product/product-list/${page}`);
+      const { data } = await axios.get(
+        process.env.REACT_APP_API_URL + `/api/v1/product/product-list/${page}`
+      );
       setLoading(false);
       setProducts([...products, ...data?.products]);
     } catch (error) {
@@ -90,19 +98,19 @@ function HomePage() {
   //get Filter product
   const filterProduct = async () => {
     try {
-      const { data } = await axios.post("/api/v1/product/product-filters", {
-        checked,
-        radio,
-      });
+      const { data } = await axios.post(
+        process.env.REACT_APP_API_URL + "/api/v1/product/product-filters",
+        {
+          checked,
+          radio,
+        }
+      );
       setProducts(data?.products);
     } catch (error) {}
   };
   return (
-    <div className="row mt-3 mb-3" style={{ backgroundColor: "#F0F8FF" }}>
-      <div
-        className="col-md-3 border border-dark"
-        style={{ backgroundColor: "#F0F8FF" }}
-      >
+    <div className="row mt-3 mb-3" style={{ backgroundColor: "#0bba48" }}>
+      <div className="col-md-3 border" style={{ backgroundColor: "#0bba48" }}>
         <h4 className="text-center">Filter By Category</h4>
         <div className="d-flex flex-column">
           {categories?.map((c) => (
@@ -143,7 +151,7 @@ function HomePage() {
             >
               <img
                 className="card-img-top"
-                src={`/api/v1/product/product-photo/${p._id}`}
+                src={`${process.env.REACT_APP_API_URL}/api/v1/product/product-photo/${p._id}`}
                 alt={p.name}
                 style={{ height: "150px" }}
               />
@@ -163,7 +171,7 @@ function HomePage() {
         <div className="m-2 p-3">
           {products && products.length < total && (
             <button
-              className="btn btn-warning"
+              className="button"
               onClick={(e) => {
                 e.preventDefault();
                 setPage(page + 1);

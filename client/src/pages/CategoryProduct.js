@@ -18,7 +18,7 @@ function CategoryProduct() {
   const getProductByCat = async () => {
     try {
       const { data } = await axios.get(
-        `/api/v1/product/product-category/${params.slug}`
+        `${process.env.REACT_APP_API_URL}/api/v1/product/product-category/${params.slug}`
       );
       setProducts(data?.products);
       setCategory(data?.category);
@@ -32,9 +32,11 @@ function CategoryProduct() {
       <div className="container mt-3">
         <div className="row">
           <div className="col-md-3 mb-3">
-            <Link to={`/categories`} className="btn w-100">
-              All Categories
-            </Link>
+            <div className="card h-100">
+              <Link to={`/categories`} className="btn w-100">
+                All Categories
+              </Link>
+            </div>
           </div>
           {categories?.map((category) => (
             <div className="col-md-3 mb-3" key={category._id}>
@@ -52,7 +54,7 @@ function CategoryProduct() {
               <div className="card m-2" style={{ width: "18rem" }} key={p._id}>
                 <img
                   className="card-img-top"
-                  src={`/api/v1/product/product-photo/${p._id}`}
+                  src={`${process.env.REACT_APP_API_URL}/api/v1/product/product-photo/${p._id}`}
                   alt={p.name}
                   style={{ height: "150px" }}
                 />

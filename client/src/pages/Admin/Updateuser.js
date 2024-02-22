@@ -22,7 +22,7 @@ function Updateuser() {
     getUserData(id);
   }, []);
   const getUserData = async (id) => {
-    let userinfo = await axios.get(`/api/v1/user/get-user/${id}`);
+    let userinfo = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/user/get-user/${id}`);
     setData(userinfo.data[0]);
   };
   const onChange = (e) => {
@@ -30,7 +30,7 @@ function Updateuser() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.put(`/api/v1/user/update-user/${id}`, data);
+    await axios.put(`${process.env.REACT_APP_API_URL}/api/v1/user/update-user/${id}`, data);
     navigate("/dashboard/admin/users");
   };
   return (

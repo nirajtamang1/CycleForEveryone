@@ -1,13 +1,13 @@
 import orderModel from "../models/orderModel.js";
 export const getAllOrder = async (req, res) => {
   try {
-    const orders = await orderModel.find();
+    const orders = await orderModel.find().sort({ createdAt: -1 });
     res.json(orders);
   } catch (error) {
     console.log(error);
     res.status(500).send({
       status: false,
-      message: "Order not get",
+      message: "Order not Get",
     });
   }
 };

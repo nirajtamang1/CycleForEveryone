@@ -4,6 +4,7 @@ import Layout from "../../components/Layout/Layout";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 import toast from "react-hot-toast";
+import Bill from "../user/Bill";
 
 function OrderInfo() {
   const [orders, setOrders] = useState([]);
@@ -13,7 +14,7 @@ function OrderInfo() {
   useEffect(() => {
     async function fetchOrders() {
       try {
-        const response = await axios.get("/api/v1/order/getAllOrder");
+        const response = await axios.get( process.env.REACT_APP_API_URL +"/api/v1/order/getAllOrder");
         setOrders(response.data);
       } catch (error) {
         console.error("Error fetching orders:", error);
@@ -37,17 +38,19 @@ function OrderInfo() {
         <td>{order.payment}</td>
         <td>
           <ul>
-            {order.products.map((product, index) => (
-              <li key={index}>
-                Name: {product.name}, Price: {product.price}
-              </li>
+            {order?.products.map((product, index) => (
+              <tr key={index}>
+                <td>{product.name}</td>
+                <td style={{ paddingLeft: "10px" }}>Rs. {product.price}</td>
+              </tr>
             ))}
           </ul>
         </td>
-        <td>
+        <td style={{ display: "flex", alignItems: "center" }}>
+          <Bill order={order} />
           <button
             onClick={() => handleDelete(order._id)}
-            className="btn btn-danger"
+            className="btn btn-danger mx-2"
           >
             Delete
           </button>
@@ -57,7 +60,7 @@ function OrderInfo() {
 
   const handleDelete = async (orderId) => {
     try {
-      await axios.delete(`/api/v1/order/deleteOrder/${orderId}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/order/deleteOrder/${orderId}`);
       // Update orders state after deletion
       const updatedOrders = orders.filter((order) => order._id !== orderId);
       setOrders(updatedOrders);

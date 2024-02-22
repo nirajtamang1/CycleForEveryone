@@ -29,7 +29,6 @@ import OrderInfo from "./pages/Admin/OrderInfo";
 
 function App() {
   return (
-    // div fragment
     <>
       <Routes>
         <Route path="/" element={<Home />} />

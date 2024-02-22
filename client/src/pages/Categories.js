@@ -14,7 +14,9 @@ export const Categories = () => {
   }, []);
   const getAllProducts = async () => {
     try {
-      const { data } = await axios.get("/api/v1/product/get-product");
+      const { data } = await axios.get(
+        process.env.REACT_APP_API_URL + "/api/v1/product/get-product"
+      );
       setProducts(data.products);
     } catch (error) {
       console.log(error);
@@ -26,9 +28,11 @@ export const Categories = () => {
       <div className="container mt-3">
         <div className="row">
           <div className="col-md-3 mb-3">
-            <Link to={`/categories`} className="btn w-100">
-              All Categories
-            </Link>
+            <div className="card h-100">
+              <Link to={`/categories`} className="btn w-100">
+                All Categories
+              </Link>
+            </div>
           </div>
           {categories?.map((category) => (
             <div className="col-md-3 mb-3" key={category._id}>
@@ -50,7 +54,7 @@ export const Categories = () => {
               >
                 <img
                   className="card-img-top"
-                  src={`/api/v1/product/product-photo/${p._id}`}
+                  src={`${process.env.REACT_APP_API_URL}/api/v1/product/product-photo/${p._id}`}
                   alt={p.name}
                   style={{ height: "150px" }}
                 />

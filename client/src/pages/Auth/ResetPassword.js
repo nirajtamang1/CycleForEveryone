@@ -14,7 +14,7 @@ function ResetPassword() {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `/api/v1/auth/reset_password/${id}/${token}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/auth/reset_password/${id}/${token}`,
         { password }
       );
       console.log(res);

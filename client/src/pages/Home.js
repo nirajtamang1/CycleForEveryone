@@ -9,14 +9,15 @@ import Contactus from "../components/Layout/Contactus";
 
 function Home() {
   const navigate = useNavigate();
-  const productCards = [];
   const [products, setProducts] = useState([]);
   useEffect(() => {
     getAllProducts();
   }, []);
   const getAllProducts = async () => {
     try {
-      const { data } = await axios.get("/api/v1/product/get-product");
+      const { data } = await axios.get(
+        process.env.REACT_APP_API_URL + "/api/v1/product/get-product"
+      );
       setProducts(data.products);
     } catch (error) {
       console.log(error);
@@ -27,6 +28,7 @@ function Home() {
     <Layout title={"Home Page-Cycle Booking System"}>
       <div className="container">
         <Banner />
+
         <section>
           <div className="pt-5">
             <h4 className="producttitle">OUR Product</h4>
@@ -38,7 +40,7 @@ function Home() {
             </p>
           </div>
           <div className="d-flex flex-wrap">
-            {products?.map((p) => (
+            {products?.slice(0, 4).map((p) => (
               <div
                 className="card m-3 shadow"
                 style={{ width: "18rem" }}
@@ -46,7 +48,7 @@ function Home() {
               >
                 <img
                   className="card-img-top"
-                  src={`/api/v1/product/product-photo/${p._id}`}
+                  src={`${process.env.REACT_APP_API_URL}/api/v1/product/product-photo/${p._id}`}
                   alt={p.name}
                   style={{ height: "150px" }}
                 />
@@ -54,6 +56,7 @@ function Home() {
                   <h5 className="card-title">{p.name}</h5>
                   <p className="card-text">{p.description.substring(0, 20)}</p>
                   <p className="card-text">Rs. {p.price}</p>
+                  <p>{p.slug}</p>
                   <button
                     className="cartbtn ms-1 w-100"
                     onClick={() => navigate(`/product/${p.slug}`)}
