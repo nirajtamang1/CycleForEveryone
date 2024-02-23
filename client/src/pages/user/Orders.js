@@ -60,7 +60,7 @@ function Orders() {
         <td>
           <Bill order={order} />
           <button
-            onClick={() => handleDelete(order)}
+            onClick={() => handleDelete(order._id)}
             className="btn btn-danger my-2"
           >
             Delete
@@ -68,10 +68,12 @@ function Orders() {
         </td>
       </tr>
     ));
-  console.log(displayOrders);
+
   const handleDelete = async (orderId) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/order/deleteOrder/${orderId}`);
+      await axios.delete(
+        `${process.env.REACT_APP_API_URL}/api/v1/order/deleteOrder/${orderId}`
+      );
       // Update orders state after deletion
       const updatedOrders = orders.filter((order) => order._id !== orderId);
       setOrders(updatedOrders);
@@ -95,7 +97,6 @@ function Orders() {
                   <tr>
                     <th>Username</th>
                     <th>Payment</th>
-
                     <th>Products</th>
                     <th>Action</th>
                   </tr>

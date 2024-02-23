@@ -12,11 +12,9 @@ function ForgotPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("Hello eveyone");
-      await axios.post(
-        process.env.REACT_APP_API_URL + "/api/v1/auth/forget-password",
-        { email }
-      );
+      await axios.post(process.env.REACT_APP_API_URL + "/api/v1/auth/forget", {
+        email,
+      });
       toast.success("Please check your mail for reset password link!");
       navigate("/login");
     } catch (error) {

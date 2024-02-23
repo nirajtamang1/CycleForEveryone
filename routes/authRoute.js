@@ -3,10 +3,10 @@ import {
   registerController,
   loginController,
   testController,
-  forgetPasswordController,
   updateProfileController,
   // resetPassword,
   postResetPassword,
+  forgetPassword,
 } from "../controllers/authController.js";
 import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
 //router object
@@ -16,8 +16,9 @@ const router = express.Router();
 router.post("/register", registerController);
 router.post("/login", loginController);
 
+router.post("/forget", forgetPassword);
+
 //Forget Password
-router.post("/forget-password", forgetPasswordController);
 router.post("/reset_password/:id/:token", postResetPassword);
 router.get("/test", requireSignIn, isAdmin, testController);
 

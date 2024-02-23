@@ -16,12 +16,17 @@ connectDB();
 
 // rest object
 const app = express();
-// app.use("view enginer", "ejs");
 
 //middleware
-app.use(cors());
+// app.use(cors());
+// Configure CORS middleware
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL, // Specify the allowed origin
+    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+  })
+);
 app.use(express.json());
-app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 
 //routes

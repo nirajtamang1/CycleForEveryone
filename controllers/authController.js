@@ -106,8 +106,9 @@ export const loginController = async (req, res) => {
     });
   }
 };
-export const forgetPasswordController = async (req, res) => {
+export const forgetPassword = async (req, res) => {
   const { email } = req.body;
+  console.log(email);
   try {
     const oldUser = await userModel.findOne({ email });
     if (!oldUser) {
@@ -118,7 +119,7 @@ export const forgetPasswordController = async (req, res) => {
     const token = JWT.sign({ id: oldUser._id, email: oldUser.email }, secret, {
       expiresIn: "5m",
     });
-    const link = `http://localhost:3000/api/v1/auth/reset_password/${oldUser._id}/${token}`;
+    const link = `${process.env.FRONTEND_URL}/api/v1/auth/reset_password/${oldUser._id}/${token}`;
     console.log(link);
     var transporter = nodemailer.createTransport({
       service: "gmail",
