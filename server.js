@@ -6,7 +6,7 @@ import categoryRoute from "./routes/categoryRoutes.js";
 import productRoute from "./routes/productRoutes.js";
 import userRoute from "./routes/userRoutes.js";
 import orderRoute from "./routes/orderRoute.js";
-import rideRoute from "./routes/rideRoute.js"
+import rideRoute from "./routes/rideRoute.js";
 
 import cors from "cors";
 //configure env
@@ -18,14 +18,16 @@ connectDB();
 const app = express();
 
 //middleware
-// app.use(cors());
+
 // Configure CORS middleware
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL, // Specify the allowed origin
-    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
-  })
-);
+// app.use(
+//   cors({
+//     origin: process.env.FRONTEND_URL,
+//     credentials: true,
+//   })
+// );
+app.use(cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
