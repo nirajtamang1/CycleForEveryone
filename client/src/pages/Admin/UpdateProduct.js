@@ -66,7 +66,7 @@ function UpdateProduct() {
       productData.append("category", category);
 
       const { data } = await axios.put(
-        `/api/v1/product/update-product/${id}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/product/update-product/${id}`,
         productData
       );
       if (data?.success) {
