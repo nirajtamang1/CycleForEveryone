@@ -23,7 +23,7 @@ function UpdateProduct() {
   const getSingleProduct = async () => {
     try {
       const { data } = await axios.get(
-        `/api/v1/product/get-product/${params.slug}`
+        `${process.env.REACT_APP_API_URL}/api/v1/product/get-product/${params.slug}`
       );
       setId(data.product._id);
       setRfid(data.product.rfid);
@@ -192,12 +192,12 @@ function UpdateProduct() {
                 />
               </div>
 
-              <div className="mb-3">
-                <button className="btn btn-primary" onClick={handleUpdate}>
+              <div>
+                <button className="btngreenColor" onClick={handleUpdate}>
                   Update Product
                 </button>
               </div>
-              <div className="mb-3">
+              <div>
                 <button className="btn btn-danger" onClick={handleDelete}>
                   Delete Product
                 </button>

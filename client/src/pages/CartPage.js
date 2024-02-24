@@ -5,7 +5,6 @@ import { useAuth } from "../context/auth";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
-import { useState } from "react";
 import toast from "react-hot-toast";
 function CartPage() {
   const pId = uuidv4();
@@ -37,7 +36,6 @@ function CartPage() {
       console.log(error);
     }
   };
-  const [paymentUrl, setPaymentUrl] = useState("");
 
   const handleOnlinePayment = async () => {
     try {
@@ -49,7 +47,6 @@ function CartPage() {
         }
       );
       const { path, params } = response.data;
-      setPaymentUrl(path);
       const form = document.createElement("form");
       form.setAttribute("method", "POST");
       form.setAttribute("action", path);
@@ -61,37 +58,10 @@ function CartPage() {
         input.setAttribute("value", params[key]);
         form.appendChild(input);
       }
-
       document.body.appendChild(form);
       form.submit();
-      form.addEventListener("submit", async () => {
-        toast.success("Payment Successfull");
-        try {
-          await onlineBooked();
-        } catch (error) {
-          console.log(error);
-        }
-      });
     } catch (error) {
       console.error(error);
-    }
-  };
-  const onlineBooked = async () => {
-    try {
-      const username = auth?.user?.name;
-      await axios.post(
-        process.env.REACT_APP_API_URL + "/api/v1/product/booking",
-        {
-          orderId: pId,
-          totalAmount: totalPrice(),
-          cart: cart,
-          username: username,
-        }
-      );
-      localStorage.removeItem("cart");
-      setCart([]);
-    } catch (error) {
-      console.error("Error making cash payment API call:", error);
     }
   };
 
@@ -185,13 +155,13 @@ function CartPage() {
                 {auth?.user?.address ? (
                   <>
                     <button
-                      className="btn btn-primary mt-3 w-100"
+                      className="btngreenColor w-100"
                       onClick={handleCashPayment}
                     >
                       Cash Payment
                     </button>
                     <button
-                      className="btn btn-primary mt-3 w-100"
+                      className="btngreenColor w-100"
                       onClick={handleOnlinePayment}
                     >
                       Online Payment

@@ -29,7 +29,9 @@ function Users() {
 
   const handleDelete = async (userId) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/user/delete-user/${userId}`);
+      await axios.delete(
+        `${process.env.REACT_APP_API_URL}/api/v1/user/delete-user/${userId}`
+      );
       toast.success("User deleted successfully");
       getAllUsers();
     } catch (error) {
@@ -67,7 +69,7 @@ function Users() {
                       <td>{user.email}</td>
                       <td>
                         <button
-                          className="btn btn-primary me-2"
+                          className="btngreenColor"
                           onClick={() =>
                             navigate(`/dashboard/admin/users/${user._id}`)
                           }

@@ -19,6 +19,7 @@ function Products() {
       toast.error("Some went wrong to get all the products");
     }
   };
+  
   useEffect(() => {
     getAllProducts();
   }, []);
@@ -35,7 +36,7 @@ function Products() {
               {products?.map((p) => (
                 <Link
                   key={p._id}
-                  to={`${process.env.REACT_APP_API_URL}/dashboard/admin/product/${p.slug}`}
+                  to={`/dashboard/admin/product/${p.slug}`}
                   className="product-link"
                 >
                   <div className="card m-2" style={{ width: "18rem" }}>

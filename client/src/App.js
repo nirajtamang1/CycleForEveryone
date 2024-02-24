@@ -26,6 +26,9 @@ import Home from "./pages/Home";
 import Product from "./pages/Product";
 import ResetPassword from "./pages/Auth/ResetPassword";
 import OrderInfo from "./pages/Admin/OrderInfo";
+import EsewaSuccess from "./pages/esewa/EsewaSuccess";
+import EsewaFailed from "./pages/esewa/EsewaFailed";
+import Ride from "./pages/Admin/Ride";
 
 function App() {
   return (
@@ -46,6 +49,7 @@ function App() {
           <Route path="admin" element={<AdminDashboard />} />
           <Route path="admin/create-product" element={<CreateProduct />} />
           <Route path="admin/product/:slug" element={<UpdateProduct />} />
+          <Route path="admin/product/ride" element={<Ride />} />
           {/* <Route path="admin/user/:id" element={<update />} /> */}
 
           <Route path="admin/create-category" element={<CreateCategory />} />
@@ -64,6 +68,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/policy" element={<Policy />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/esewa_payment_success" element={<EsewaSuccess />} />
+        <Route path="/esewa_paymnet_failed" element={<EsewaFailed />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>

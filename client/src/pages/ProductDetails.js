@@ -131,11 +131,7 @@ function ProductDetails() {
               ))}
             </select>
             <button
-              className="ms-2 p-2"
-              style={{
-                backgroundColor: "#0bba48",
-                border: "0px solid black",
-              }}
+              className="btngreenColor"
               onClick={() => {
                 const updatedProduct = {
                   ...product,

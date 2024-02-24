@@ -5,8 +5,8 @@ import authRoute from "./routes/authRoute.js";
 import categoryRoute from "./routes/categoryRoutes.js";
 import productRoute from "./routes/productRoutes.js";
 import userRoute from "./routes/userRoutes.js";
-import esewaRoute from "./routes/esewaRoute.js";
 import orderRoute from "./routes/orderRoute.js";
+import rideRoute from "./routes/rideRoute.js"
 
 import cors from "cors";
 //configure env
@@ -35,7 +35,7 @@ app.use("/api/v1/category", categoryRoute);
 app.use("/api/v1/product", productRoute);
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/order", orderRoute);
-app.use("/api/v1/", esewaRoute);
+app.use("/api/v1/ride", rideRoute);
 
 // app.listen(process.env.PORT, "192.168.254.127", () => {
 app.listen(process.env.PORT, () => {

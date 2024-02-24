@@ -23,6 +23,9 @@ function AdminMenu() {
           <NavLink to="/dashboard/admin/order" className="menu">
             Order
           </NavLink>
+          <NavLink to="/dashboard/admin/product/ride" className="menu">
+            Ride
+          </NavLink>
         </ul>
       </div>
     </>

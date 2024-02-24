@@ -144,7 +144,7 @@ function CreateProduct() {
                 onChange={(e) => setPrice(e.target.value)}
               />
 
-              <button className="btn btn-primary" onClick={handleCreate}>
+              <button className="btngreenColor" onClick={handleCreate}>
                 Create Product
               </button>
             </div>

@@ -105,8 +105,8 @@ function CreateCategory() {
               />
             </div>
             <div className="w-100">
-              <table className="table table-bordered">
-                <thead className="table-primary">
+              <table className="table table-striped">
+                <thead>
                   <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Action</th>
@@ -118,7 +118,7 @@ function CreateCategory() {
                       <td>{c.name}</td>
                       <td>
                         <button
-                          className="btn btn-primary me-2"
+                          className="btngreenColor"
                           onClick={() => {
                             setVisible(true);
                             setUpdatedName(c.name);

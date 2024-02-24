@@ -7,7 +7,7 @@ export const getAllOrder = async (req, res) => {
     console.log(error);
     res.status(500).send({
       status: false,
-      message: "Order not Get",
+      message: "Order Not Succesfull",
     });
   }
 };

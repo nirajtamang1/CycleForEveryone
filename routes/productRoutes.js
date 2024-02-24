@@ -37,6 +37,7 @@ router.get("/get-product", getProductController);
 router.get("/get-product/:slug", getSingleProductController);
 // get single product
 router.get("/get-rfid/:rfid", getProductRFID);
+
 router.post("/post-rfid", postRfidData);
 
 router.put(

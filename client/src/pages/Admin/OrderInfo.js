@@ -14,8 +14,10 @@ function OrderInfo() {
   useEffect(() => {
     async function fetchOrders() {
       try {
-        const response = await axios.get( process.env.REACT_APP_API_URL +"/api/v1/order/getAllOrder");
-        setOrders(response.data);
+        const response = await axios.get(
+          process.env.REACT_APP_API_URL + "/api/v1/order/getAllOrder"
+        );
+        setOrders(response?.data);
       } catch (error) {
         console.error("Error fetching orders:", error);
       }
@@ -29,7 +31,7 @@ function OrderInfo() {
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
-
+  console.log(orders);
   const displayOrders = orders
     .slice(pageNumber * ordersPerPage, (pageNumber + 1) * ordersPerPage)
     .map((order) => (
@@ -60,7 +62,9 @@ function OrderInfo() {
 
   const handleDelete = async (orderId) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/order/deleteOrder/${orderId}`);
+      await axios.delete(
+        `${process.env.REACT_APP_API_URL}/api/v1/order/deleteOrder/${orderId}`
+      );
       // Update orders state after deletion
       const updatedOrders = orders.filter((order) => order._id !== orderId);
       setOrders(updatedOrders);
@@ -79,7 +83,7 @@ function OrderInfo() {
           </div>
           <div className="col-md-9">
             <div className="table-responsive">
-              <table className="table table-bordered">
+              <table className="table table-striped">
                 <thead>
                   <tr>
                     <th>Username</th>

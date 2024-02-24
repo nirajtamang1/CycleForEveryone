@@ -336,7 +336,10 @@ export const postRfidData = async (req, res) => {
     console.log("Read Rfid");
     console.log(request["rfid"]);
     let rfid = request["rfid"];
-
+    const products = await productModel
+      .findOne({ rfid: req.body.rfid })
+      .select("-photo")
+      .populate("category");
     if (rfid !== null) {
       if (!startTimes[rfid]) {
         // If start time for this RFID tag doesn't exist, it means this is the start of the ride
@@ -354,12 +357,14 @@ export const postRfidData = async (req, res) => {
         const endTime = new Date();
         const rideDuration = endTime - startTime; // Time difference in milliseconds
         console.log("End ride cycle");
-
+        console.log(rideDuration);
         await rideModel.create({
           rfid: rfid,
+          product: products?.name,
           startTime: startTime,
           endTime: endTime,
-          duration: rideDuration / 6000,
+          duration: rideDuration / 60000,
+          price: rideDuration / 60000,
         });
         res.status(200).send({
           message: "Cycle ride ended",
@@ -392,8 +397,8 @@ export const paymentController = async (req, res) => {
       tAmt: amount,
       pid: orderId,
       scd: process.env.ESEWA_MARCHANT_CODE,
-      su: "http://localhost:3000/dashboard/user/orders",
-      fu: "http://localhost:3000/users/esewa_payment_failed",
+      su: `${process.env.FRONTEND_URL}/esewa_payment_success`,
+      fu: `${process.env.FRONTEND_URL}/esewa_payment_failed`,
     };
 
     return res.json({ path, params });

@@ -5,8 +5,6 @@ import logo from "../../images/logos.png";
 
 function Bill({ order }) {
   const handleDownloadOrder = () => {
-    console.log(order);
-    console.log(order._id);
     // Convert order HTML to image using html2canvas
     const orderContainer = document.getElementById(
       `order-container-${order._id}`
@@ -32,16 +30,8 @@ function Bill({ order }) {
 
   return (
     <div>
-      <button
-        onClick={handleDownloadOrder}
-        style={{
-          backgroundColor: "green",
-          border: "none",
-          color: "white",
-          padding: "5px",
-        }}
-      >
-        Download Order
+      <button onClick={handleDownloadOrder} className="btngreenColor">
+        Download Bill
       </button>
       <div id={`order-container-${order._id}`} style={{ display: "none" }}>
         <img

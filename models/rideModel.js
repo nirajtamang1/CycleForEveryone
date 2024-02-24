@@ -6,6 +6,10 @@ const rideSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  product: {
+    type: String,
+    required: true,
+  },
   startTime: {
     type: Date,
     required: true,
@@ -16,6 +20,10 @@ const rideSchema = new mongoose.Schema({
   },
   duration: {
     type: Number, // Duration in milliseconds
+    default: null,
+  },
+  price: {
+    type: Number,
     default: null,
   },
 });

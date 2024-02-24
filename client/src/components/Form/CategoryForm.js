@@ -14,7 +14,7 @@ function CategoryForm({ handleSubmit, value, setValue }) {
           />
         </div>
 
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="button" style={{ padding: "8px" }}>
           Submit
         </button>
       </form>

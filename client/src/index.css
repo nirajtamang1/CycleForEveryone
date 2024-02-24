@@ -9,6 +9,7 @@
 
 :root {
   --text-color-green: #0bba48;
+  --hover-color-green: #079639;
   --btn-bg-gray: #e9e6ed;
   --text-color-white: #ffffff;
   --text-color-black: #555555;
@@ -87,13 +88,14 @@ li .active {
 }
 .button {
   color: var(--text-color-white);
+  border: none;
   padding: 15px 20px;
   background-color: var(--text-color-green);
   border: 1px solid var(--text-color-green);
   border-radius: 5px;
 }
 .button:hover {
-  background-color: var(--text-color-black);
+  background-color: var(--hover-color-green);
 }
 
 .login {
@@ -203,4 +205,17 @@ li .active {
 
 .pagination__link--active {
   color: var(--text-color-green);
+}
+
+/* table button  */
+.btngreenColor {
+  background-color: var(--text-color-green);
+  border: none;
+  color: var(--text-color-white);
+  padding: 7px;
+  border-radius: 8px;
+  margin: 5px;
+}
+.btngreenColor:hover {
+  background-color: var(--hover-color-green);
 }
