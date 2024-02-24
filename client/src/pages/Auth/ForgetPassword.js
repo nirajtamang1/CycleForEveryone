@@ -27,7 +27,7 @@ function ForgotPassword() {
     <Layout>
       <div
         className="d-flex justify-content-center align-items-center mx-auto"
-        style={{ backgroundColor: "#0bba48", height: "75vh", color: "#555555" }}
+        style={{ backgroundColor: "#0bba48", height: "80vh", color: "#555555" }}
       >
         <div className="bg-white p-3 rounded w-40">
           <h4>Forgot Password</h4>

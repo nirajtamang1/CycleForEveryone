@@ -18,10 +18,13 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(process.env.REACT_APP_API_URL + "/api/v1/auth/login", {
-        email,
-        password,
-      });
+      const res = await axios.post(
+        process.env.REACT_APP_API_URL + "/api/v1/auth/login",
+        {
+          email,
+          password,
+        }
+      );
       if (res.data.success) {
         toast.success(res.data.message);
         setAuth({
@@ -43,7 +46,7 @@ function Login() {
     <Layout title="Login-Cycle For Everyone">
       <div
         className="d-flex justify-content-center align-items-center mx-auto text-center"
-        style={{ backgroundColor: "#0bba48", height: "75vh" }}
+        style={{ backgroundColor: "#0bba48", height: "80vh" }}
       >
         <div
           className="login p-5 shadow border text-center"

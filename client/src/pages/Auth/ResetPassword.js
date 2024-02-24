@@ -32,7 +32,7 @@ function ResetPassword() {
     <Layout>
       <div
         className="d-flex justify-content-center align-items-center mx-auto "
-        style={{ backgroundColor: "#0bba48", height: "75vh" }}
+        style={{ backgroundColor: "#0bba48", height: "80vh" }}
       >
         <div
           className="login shadow border"
