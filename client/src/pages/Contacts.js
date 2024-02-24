@@ -31,7 +31,7 @@ function Contacts() {
               provide the best services for you and your bicycle.
             </p>
             <div>
-              <TiMessage />: CycleForEveryone@gmail.com <br />
+              <TiMessage />: cyclesforeveryone@gmail.com <br />
               <TiPhoneOutline />: 9818633093
             </div>
           </div>

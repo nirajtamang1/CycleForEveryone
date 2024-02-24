@@ -379,7 +379,7 @@ export const postRfidData = async (req, res) => {
   } catch (error) {
     res.status(500).send({
       success: false,
-      message: "Error while posting data",
+      message: "Error While posting data",
       error,
     });
   }

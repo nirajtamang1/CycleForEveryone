@@ -18,7 +18,6 @@ import {
   updateProductController,
 } from "../controllers/productController.js";
 import formidable from "express-formidable";
-import { verifyPayment } from "../controllers/esawaController.js";
 
 const router = express.Router();
 
