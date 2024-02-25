@@ -33,25 +33,44 @@ function Bill({ order }) {
       <button onClick={handleDownloadOrder} className="btngreenColor">
         Download Bill
       </button>
-      <div id={`order-container-${order._id}`} style={{ display: "none" }}>
+      <div
+        id={`order-container-${order._id}`}
+        style={{ display: "none", width: "60vh", height: "auto" }}
+      >
         <img
           className="logo"
           src={logo}
           alt="logo of comapany"
           style={{ width: 150 }}
         />
-        <h1>Order Details</h1>
-        <p>Name: {order.username}</p>
-        <h2>Products:</h2>
-        <ul>
-          {order?.products.map((product, index) => (
-            <tr key={index}>
-              <td>{product.name}</td>
-              <td style={{ paddingLeft: "10px" }}>{product.price}</td>
+        <h1>Bill</h1>
+        <h5>Name: {order.username}</h5>
+        <h2>Products Details</h2>
+
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Duration</th>
+              <th>Price</th>
             </tr>
-          ))}
-        </ul>
-        <p>Total Amount: Rs. {order.payment}</p>
+          </thead>
+          <tbody>
+            {console.log(order)}
+            {order?.products.map((product, index) => (
+              <tr key={index}>
+                <td>{product.name}</td>
+                <td>{product.selectedDateTime.split(",")[0]}</td>
+                <td>{product.selectedDateTime.split(",")[1]}</td>
+                <td>{product.duration}</td>
+                <td>Rs. {product.price}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <h5 className="total-amount">Total Amount: Rs. {order.payment}</h5>
       </div>
     </div>
   );

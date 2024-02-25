@@ -20,7 +20,6 @@ router.post("/forget", forgetPassword);
 
 //Forget Password
 router.post("/reset_password/:id/:token", postResetPassword);
-router.get("/test", requireSignIn, isAdmin, testController);
 
 //protected route
 router.get("/user-auth", requireSignIn, (req, res) => {

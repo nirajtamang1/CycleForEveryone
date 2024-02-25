@@ -92,7 +92,7 @@ function Orders() {
           </div>
           <div className="col-md-9">
             <div className="table-responsive">
-              <table className="table">
+              <table className="table table-striped">
                 <thead>
                   <tr>
                     <th>Username</th>
