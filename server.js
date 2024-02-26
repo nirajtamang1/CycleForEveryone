@@ -39,7 +39,7 @@ app.use("/api/v1/user", userRoute);
 app.use("/api/v1/order", orderRoute);
 app.use("/api/v1/ride", rideRoute);
 
-// app.listen(process.env.PORT, "192.168.254.127", () => {
+// app.listen(process.env.PORT, "10.22.62.119", () => {
 app.listen(process.env.PORT, () => {
   console.log(
     `Server running on ${process.env.DEV_MODE} port number ${
